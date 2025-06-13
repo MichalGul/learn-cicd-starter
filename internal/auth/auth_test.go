@@ -10,7 +10,7 @@ func TestGetAPIKey(t *testing.T) {
 	headerRandom.Add("Authorization", "test test")
 
 	headerValid := http.Header{}
-	headerValid.Add("Authorization", "ApiKey qwe123456")
+	headerValid.Add("", "ApiKey qwe123456")
 
 	tests := []struct {
 		name string
@@ -26,13 +26,13 @@ func TestGetAPIKey(t *testing.T) {
 		},
 		{
 			name: "Missing ApiKey name",
-			header: headerRandom,
+			header: http.Header{"Authorization": []string{"test test"}},
 			apiKey: "",
 			wantErr: true,
 		},
 		{
 			name: "Return Valid ApiKey",
-			header: headerValid,
+			header: http.Header{"Authorization": []string{"ApiKey qwe123456"}},
 			apiKey: "qwe123456",
 			wantErr: false,
 		},
