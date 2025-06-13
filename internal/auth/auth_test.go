@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"testing"
 	"net/http"
+	"testing"
 )
 
 func TestGetAPIKey(t *testing.T) {
@@ -13,27 +13,27 @@ func TestGetAPIKey(t *testing.T) {
 	headerValid.Add("", "ApiKey qwe123456")
 
 	tests := []struct {
-		name string
-		header http.Header
-		apiKey string
+		name    string
+		header  http.Header
+		apiKey  string
 		wantErr bool
-	} {
+	}{
 		{
-			name: "Empty Api key",
-			header: http.Header{},
-			apiKey: "",
+			name:    "Empty Api key",
+			header:  http.Header{},
+			apiKey:  "",
 			wantErr: true,
 		},
 		{
-			name: "Missing ApiKey name",
-			header: http.Header{"Authorization": []string{"test test"}},
-			apiKey: "",
+			name:    "Missing ApiKey name",
+			header:  http.Header{"Authorization": []string{"test test"}},
+			apiKey:  "",
 			wantErr: true,
 		},
 		{
-			name: "Return Valid ApiKey",
-			header: http.Header{"Authorization": []string{"ApiKey qwe123456"}},
-			apiKey: "qwe123456123",
+			name:    "Return Valid ApiKey",
+			header:  http.Header{"Authorization": []string{"ApiKey qwe123456"}},
+			apiKey:  "qwe123456",
 			wantErr: false,
 		},
 	}
@@ -49,6 +49,5 @@ func TestGetAPIKey(t *testing.T) {
 			}
 		})
 	}
-
 
 }
